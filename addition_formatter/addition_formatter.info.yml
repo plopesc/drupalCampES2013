@@ -1,0 +1,7 @@
+name: Addition formatter
+type: module
+description: 'Field formatter which shows the sum of all field items.'
+package: drupalCampES2013
+core: 8.x
+dependencies:
+  - number
