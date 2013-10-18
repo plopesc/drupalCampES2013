@@ -1,0 +1,7 @@
+name: Arithmetic field
+type: module
+description: 'Field that represents arithmetic operations.'
+package: drupalCampES2013
+core: 8.x
+dependencies:
+  - number
