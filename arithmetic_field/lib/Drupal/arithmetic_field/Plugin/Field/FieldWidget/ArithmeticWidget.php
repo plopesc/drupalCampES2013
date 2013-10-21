@@ -2,16 +2,14 @@
 
 /**
  * @file
- * Contains \Drupal\arithmetic_field\Plugin\field\widget\ArithmeticWidget.
+ * Contains \Drupal\arithmetic_field\Plugin\Field\FieldWidget\ArithmeticWidget.
  */
 
-namespace Drupal\arithmetic_field\Plugin\field\widget;
+namespace Drupal\arithmetic_field\Plugin\Field\FieldWidget;
 
-use Drupal\arithmetic_field\Plugin\field\field_type\ArithmeticItem;
-use Drupal\field\Annotation\FieldWidget;
-use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Entity\Field\FieldItemListInterface;
-use Drupal\field\Plugin\Type\Widget\WidgetBase;
+use Drupal\arithmetic_field\Plugin\Field\FieldType\ArithmeticItem;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\WidgetBase;
 
 /**
  * Plugin implementation of the 'arithmetic' widget.

@@ -2,15 +2,13 @@
 
 /**
  * @file
- * Contains \Drupal\arithmetic_field\Plugin\field\field_type\ArithmeticItemBase.
+ * Contains \Drupal\arithmetic_field\Plugin\Field\FieldType\ArithmeticItemBase.
  */
 
-namespace Drupal\arithmetic_field\Plugin\field\field_type;
+namespace Drupal\arithmetic_field\Plugin\Field\FieldType;
 
-use Drupal\Core\Entity\Annotation\FieldType;
-use Drupal\Core\Annotation\Translation;
+use Drupal\Core\Field\ConfigFieldItemBase;
 use Drupal\field\FieldInterface;
-use Drupal\field\Plugin\Type\FieldType\ConfigFieldItemBase;
 
 /**
  * Plugin implementation of the 'arithmetic' field type.

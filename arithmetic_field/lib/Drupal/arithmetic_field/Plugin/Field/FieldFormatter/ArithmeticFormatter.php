@@ -2,15 +2,13 @@
 
 /**
  * @file
- * Definition of Drupal\arithmetic_field\Plugin\field\formatter\ArithmeticFormatter.
+ * Contains \Drupal\arithmetic_field\Plugin\Field\FieldFormatter\ArithmeticFormatter.
  */
 
-namespace Drupal\arithmetic_field\Plugin\field\formatter;
+namespace Drupal\arithmetic_field\Plugin\Field\FieldFormatter;
 
-use Drupal\field\Annotation\FieldFormatter;
-use Drupal\Core\Annotation\Translation;
-use Drupal\field\Plugin\Type\Formatter\FormatterBase;
-use Drupal\Core\Entity\Field\FieldItemListInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FormatterBase;
 
 /**
  * Plugin implementation of the 'basic_addition' formatter.

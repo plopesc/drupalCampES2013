@@ -2,18 +2,16 @@
 
 /**
  * @file
- * Definition of Drupal\addition_formatter\Plugin\field\formatter\FullAdditionFormatter.
+ * Contains \Drupal\addition_formatter\Plugin\Field\FieldFormatter\FullAdditionFormatter.
  *
  * Full formatter for additions that inherits from
  * Drupal\addition_formatter\Plugin\field\formatter\FullAdditionFormatter and
  * includes full support for prefix, suffix and separators.
  */
 
-namespace Drupal\addition_formatter\Plugin\field\formatter;
+namespace Drupal\addition_formatter\Plugin\Field\FieldFormatter;
 
-use Drupal\field\Annotation\FieldFormatter;
-use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Entity\Field\FieldItemListInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 
 /**
  * Plugin implementation of the 'full_addition' formatter.

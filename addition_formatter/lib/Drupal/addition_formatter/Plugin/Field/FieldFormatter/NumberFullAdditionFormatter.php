@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Definition of Drupal\addition_formatter\Plugin\field\formatter\NumberFullAdditionFormatter.
+ * Contains \Drupal\addition_formatter\Plugin\Field\FieldFormatter\NumberFullAdditionFormatter.
  *
  * This formatter inherits from
  * Drupal\number\Plugin\field\formatter\NumberDecimalFormatter, then its code is
@@ -13,12 +13,10 @@
  * OO inheritance for Field API is great!!
  */
 
-namespace Drupal\addition_formatter\Plugin\field\formatter;
+namespace Drupal\addition_formatter\Plugin\Field\FieldFormatter;
 
-use Drupal\field\Annotation\FieldFormatter;
-use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Entity\Field\FieldItemListInterface;
-use Drupal\number\Plugin\field\formatter\NumberDecimalFormatter;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\number\Plugin\Field\FieldFormatter\NumberDecimalFormatter;
 
 /**
  * Plugin implementation of the 'number_full_addition' formatter.

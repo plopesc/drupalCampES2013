@@ -2,17 +2,15 @@
 
 /**
  * @file
- * Definition of Drupal\addition_formatter\Plugin\field\formatter\BasicAdditionFormatter.
+ * Contains \Drupal\addition_formatter\Plugin\Field\FieldFormatter\BasicAdditionFormatter.
  *
  * Basic formatter that represent the sum of all numeric field items.
  */
 
-namespace Drupal\addition_formatter\Plugin\field\formatter;
+namespace Drupal\addition_formatter\Plugin\Field\FieldFormatter;
 
-use Drupal\field\Annotation\FieldFormatter;
-use Drupal\Core\Annotation\Translation;
-use Drupal\field\Plugin\Type\Formatter\FormatterBase;
-use Drupal\Core\Entity\Field\FieldItemListInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FormatterBase;
 
 /**
  * Plugin implementation of the 'basic_addition' formatter.
