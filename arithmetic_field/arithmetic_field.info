@@ -1,0 +1,6 @@
+name = Arithmetic field
+description = Field that represents arithmetic operations.
+package = drupalCampES2013
+core = 7.x
+tags[] = developer
+dependencies[] = number

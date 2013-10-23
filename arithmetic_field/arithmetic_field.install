@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the arithmetic_field module.
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function arithmetic_field_field_schema($field) {
+  return array(
+    'columns' => array(
+      'operand1' => array(
+        'type' => 'float',
+        'not null' => FALSE
+      ),
+      'operand2' => array(
+        'type' => 'float',
+        'not null' => FALSE
+      ),
+      'operation' => array(
+        'type' => 'varchar',
+        'length' => 1,
+        'not null' => FALSE
+      ),
+      'value' => array(
+        'type' => 'float',
+        'not null' => FALSE
+      ),
+    )
+  );
+}

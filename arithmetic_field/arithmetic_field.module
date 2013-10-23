@@ -1,0 +1,142 @@
+<?php
+
+/**
+ * @file
+ * Provides field that provides arithmetic operations.
+ */
+
+define('ARITHMETIC_FIELD_ADDITION', '+');
+define('ARITHMETIC_FIELD_SUBTRACTION', '-');
+define('ARITHMETIC_FIELD_MULTIPLICATION', 'x');
+define('ARITHMETIC_FIELD_DIVISION', '/');
+
+/**
+ * Implements hook_field_info().
+ */
+function arithmetic_field_field_info() {
+  return array(
+    'arithmetic' => array(
+      'label' => t('Arithmetic operation'),
+      'description' => t('Field that represents a basic arithmetic operation'),
+      'default_widget' => 'arithmetic_addition',
+      'default_formatter' => 'arithmetic_formatter',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function arithmetic_field_field_is_empty($item, $field) {
+  if ((empty($item['operand1']) && (string) $item['operand1'] !== '0') || (empty($item['operand2']) && (string) $item['operand2'] !== '0')) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function arithmetic_field_field_widget_info() {
+  return array(
+    'arithmetic_addition' => array(
+      'label' => t('Arithmetic_operation'),
+      'field types' => array('arithmetic'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function arithmetic_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $operand1 = isset($items[$delta]['operand1']) ? $items[$delta]['operand1'] : '';
+  $operand2 = isset($items[$delta]['operand2']) ? $items[$delta]['operand2'] : '';
+  $operation = isset($items[$delta]['operation']) ? $items[$delta]['operation'] : ARITHMETIC_FIELD_ADDITION;
+
+  $element += array(
+    '#type' => 'fieldset',
+  );
+  $element['operand1'] = array(
+    '#type' => 'textfield',
+    '#default_value' => $operand1,
+    '#weight' => 0,
+  );
+  $element['operation'] = array(
+    '#type' => 'select',
+    '#options' => drupal_map_assoc(array(
+      ARITHMETIC_FIELD_ADDITION,
+      ARITHMETIC_FIELD_SUBTRACTION,
+      ARITHMETIC_FIELD_MULTIPLICATION,
+      ARITHMETIC_FIELD_DIVISION,
+    )),
+    '#default_value' => $operation,
+    '#weight' => 1,
+    '#element_validate' => array('arithmetic_field_widget_validate'),
+  );
+  $element['operand2'] =  array(
+    '#type' => 'textfield',
+    '#default_value' => $operand2,
+    '#weight' => 2,
+  );
+
+  return $element;
+}
+
+
+function arithmetic_field_widget_validate($element, &$form_state, $form) {
+  $values = &$form_state['values'][$element['#parents'][0]][$element['#parents'][1]][$element['#parents'][2]];
+
+  switch ($values['operation']) {
+    case ARITHMETIC_FIELD_SUBTRACTION:
+      $values['value'] = $values['operand1'] - $values['operand2'];
+      break;
+    case ARITHMETIC_FIELD_MULTIPLICATION:
+      $values['value'] = $values['operand1'] * $values['operand2'];
+      break;
+    case ARITHMETIC_FIELD_DIVISION:
+      $values['value'] = $values['operand1'] / $values['operand2'];
+      break;
+    case ARITHMETIC_FIELD_ADDITION:
+    default:
+      $values['value'] = $values['operand1'] + $values['operand2'];
+  }
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function arithmetic_field_field_formatter_info() {
+  return array(
+    'arithmetic_formatter' => array(
+      'label' => t('Arithmetic Formatter'),
+      'description' => t('Display for arithmetic field'),
+      'field types' => array('arithmetic'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function arithmetic_field_field_formatter_info_alter(&$info) {
+  if (isset($info['number_unformatted'])) {
+    $info['number_unformatted']['field_types'][] = 'arithmetic';
+  }
+  if (isset($info['number_decimal'])) {
+    $info['number_decimal']['field_types'][] = 'arithmetic';
+  }
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function arithmetic_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  foreach ($items as $delta => $item) {
+    $element[$delta] = array('#markup' => "${item['operand1']} ${item['operation']} ${item['operand2']} = ${item['value']}");
+  }
+
+  return $element;
+}
