@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Defines addition formatter implementation.
+ */
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function addition_formatter_field_formatter_info() {
+  return array(
+    'addition_formatter_basic' => array(
+      'label' => t('Basic Addition Formatter'),
+      'description' => t('Displays the result of the addition of all the field items'),
+      'field types' => array('number_integer', 'number_decimal', 'number_float'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function addition_formatter_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  if ($items) {
+    $addition = 0;
+    foreach ($items as $delta => $item) {
+      $addition += $item['value'];
+    }
+    $element[0] = array('#markup' => $addition);
+  }
+
+  return $element;
+}

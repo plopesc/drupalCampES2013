@@ -1,0 +1,6 @@
+name = Addition formatter
+description = Field formatter which shows the sum of all field items.
+package = drupalCampES2013
+core = 7.x
+tags[] = developer
+dependencies[] = number
