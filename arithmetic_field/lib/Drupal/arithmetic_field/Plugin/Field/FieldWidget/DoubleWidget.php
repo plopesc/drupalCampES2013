@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\arithmetic_field\Plugin\Field\FieldWidget\ArithmeticWidget.
+ * Contains \Drupal\arithmetic_field\Plugin\Field\FieldWidget\DoubleWidget.
  */
 
 namespace Drupal\arithmetic_field\Plugin\Field\FieldWidget;
@@ -12,11 +12,11 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 
 /**
- * Plugin implementation of the 'arithmetic' widget.
+ * Plugin implementation of the 'double' widget.
  *
  * @FieldWidget(
- *   id = "arithmetic",
- *   label = @Translation("Arithmetic"),
+ *   id = "double",
+ *   label = @Translation("Double"),
  *   field_types = {
  *     "arithmetic"
  *   },
@@ -25,7 +25,7 @@ use Drupal\Core\Field\WidgetBase;
  *   }
  * )
  */
-class ArithmeticWidget extends WidgetBase {
+class DoubleWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
@@ -62,42 +62,27 @@ class ArithmeticWidget extends WidgetBase {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, array &$form_state) {
     $operand1 = isset($items[$delta]->operand1) ? $items[$delta]->operand1 : NULL;
-    $operand2 = isset($items[$delta]->operand2) ? $items[$delta]->operand2 : NULL;
-    $operation = isset($items[$delta]->operation) ? $items[$delta]->operation : ArithmeticItem::ADDITION;
 
     $element += array(
-      '#type' => 'fieldset',
-    );
-
-    $element['operand1'] = array(
       '#type' => 'number',
       '#default_value' => $operand1,
       '#placeholder' => $this->getSetting('placeholder'),
       '#step' => 'any',
-      '#weight' => 0,
     );
 
-    $element['operation'] = array(
-      '#type' => 'select',
-      '#options' => drupal_map_assoc(array(
-        ArithmeticItem::ADDITION,
-        ArithmeticItem::SUBTRACTION,
-        ArithmeticItem::MULTIPLICATION,
-        ArithmeticItem::DIVISION,
-      )),
-      '#default_value' => $operation,
-      '#weight' => 1,
-    );
+    return array('operand1' => $element);
+  }
 
-    $element['operand2'] = array(
-      '#type' => 'number',
-      '#default_value' => $operand2,
-      '#placeholder' => $this->getSetting('placeholder'),
-      '#step' => 'any',
-      '#weight' => 2,
-    );
+  /**
+   * {@inheritdoc}
+   */
+  public function massageFormValues(array $values, array $form, array &$form_state) {
+    foreach ($values as &$item) {
+      $item['operation'] = ArithmeticItem::MULTIPLICATION;
+      $item['operand2'] = 2;
+    }
 
-    return $element;
+    return $values;
   }
 
 }

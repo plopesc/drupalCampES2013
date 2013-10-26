@@ -112,4 +112,24 @@ class ArithmeticItem extends ConfigFieldItemBase {
     return FALSE;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function preSave() {
+    switch($this->operation) {
+      case ArithmeticItem::SUBTRACTION:
+        $this->value = $this->operand1 - $this->operand2;
+        break;
+      case ArithmeticItem::MULTIPLICATION:
+        $this->value = $this->operand1 * $this->operand2;
+        break;
+      case ArithmeticItem::DIVISION:
+        $this->value = $this->operand1 / $this->operand2;
+        break;
+      case ArithmeticItem::ADDITION:
+      default:
+        $this->value = $this->operand1 + $this->operand2;
+    }
+  }
+
 }
