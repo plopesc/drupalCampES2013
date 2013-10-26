@@ -43,8 +43,6 @@ class NumberFullAdditionFormatter extends NumberDecimalFormatter {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items) {
-    $elements = array();
-
       foreach ($items as $delta => $item) {
         if ($delta != 0) {
           $items[0]->value += $item->value;
